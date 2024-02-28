@@ -1,9 +1,11 @@
 local M = {}
 
+M.default_clean_dir = "~/Downloads"
+
 M.dirs = {
-    music = "home/Music",
-    documents = "home/Documents",
-    videos = "home/Videos"
+    music = "~/Music",
+    documents = "~/Documents",
+    videos = "~/Videos"
 }
 
 M.extensions = {
@@ -25,7 +27,6 @@ end
 
 function M.extract_category(target_ext)
     local cat = nil
-
     for category, extensions in pairs(M.extensions) do
         for _, ext in ipairs(extensions) do
             if ext == target_ext then
@@ -33,7 +34,6 @@ function M.extract_category(target_ext)
                 break
             end
         end
-
         if cat then break end
     end
 
@@ -49,6 +49,48 @@ function M.get_directory(target_cat)
     end
 
     return dir
+end
+
+function M.contains_extension(target_ext)
+    local does_contain = false
+    for category, extensions in pairs(M.extensions) do
+        for _, ext in ipairs(extensions) do
+            if ext == target_ext then
+                does_contain = true
+                break
+            end
+        end
+        if does_contain then break end
+    end
+
+    return does_contain
+end
+
+function M.contains_category(target_cat)
+    local does_contain = false
+    for category, extensions in pairs(M.extensions) do
+        if target_cat == category then
+            does_contain = true
+        end
+
+        if does_contain then break end
+    end
+    return does_contain
+end
+
+function M.add_extension(target_cat, target_ext)
+    for category, extensions in pairs(M.extensions) do
+        if target_cat == category then
+            table.insert(extensions, target_ext)
+            return true
+        end
+    end
+
+    return false
+end
+
+function M.add_category(target_name, target_path)
+    -- todo
 end
 
 return M

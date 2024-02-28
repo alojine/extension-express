@@ -3,6 +3,7 @@ local defaults = require("defaults")
 
 local M = {}
 
+-- local target = defaults.default_clean_dir
 local target = "~/Temp"
 local destination = "~/Destination"
 
@@ -18,7 +19,7 @@ function M.clean(dir)
         if ext then
             local category = defaults.extract_category(ext)
             local dir = defaults.get_directory(category)
-            shell_utils.execute_command("mv " .. target .. "/" .. filename .. " " .. destination)
+            shell_utils.execute_command("mv " .. target .. "/" .. filename .. " " .. dir)
         end
     end
 end
