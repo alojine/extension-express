@@ -4,9 +4,11 @@ local defaults = require("defaults")
 local M = {}
 
 local target = "~/Temp"
+local destination = "~/Destination"
 
 function M.clean(dir)
     if dir ~= nil then
+        -- upgrade directory search
         target = dir
     end
 
@@ -16,6 +18,7 @@ function M.clean(dir)
         if ext then
             local category = defaults.extract_category(ext)
             local dir = defaults.get_directory(category)
+            shell_utils.execute_command("mv " .. target .. "/" .. filename .. " " .. destination)
         end
     end
 end
