@@ -23,7 +23,7 @@ function M.showcase_defaults()
     end
 end
 
-function M.match_category(target_ext)
+function M.extract_category(target_ext)
     local cat = nil
 
     for category, extensions in pairs(M.extensions) do
@@ -38,6 +38,17 @@ function M.match_category(target_ext)
     end
 
     return cat
+end
+
+function M.get_directory(target_cat)
+    local dir = nil
+    for category, directory in pairs(M.dirs) do
+        if target_cat == category then
+            dir = directory
+        end
+    end
+
+    return dir
 end
 
 return M

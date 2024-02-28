@@ -3,8 +3,9 @@ local defaults = require("defaults")
 
 local M = {}
 
+local target = "~/Temp"
+
 function M.clean(dir)
-    local target = "~/Temp"
     if dir ~= nil then
         target = dir
     end
@@ -13,8 +14,8 @@ function M.clean(dir)
     for filename in items:gmatch("[^\r\n]+") do
         local _, _, ext = filename:find("^.+(%..+)$")
         if ext then
-            local category = defaults.match_category(ext)
-            print(category)
+            local category = defaults.extract_category(ext)
+            local dir = defaults.get_directory(category)
         end
     end
 end
