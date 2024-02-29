@@ -78,6 +78,9 @@ function M.contains_category(target_cat)
     return does_contain
 end
 
+function M.contains_directory(target_dir)
+end
+
 function M.add_extension(target_cat, target_ext)
     for category, extensions in pairs(M.extensions) do
         if target_cat == category then
@@ -87,10 +90,6 @@ function M.add_extension(target_cat, target_ext)
     end
 
     return false
-end
-
-function M.add_category(target_name, target_path)
-    -- todo
 end
 
 return M

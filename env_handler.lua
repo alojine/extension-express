@@ -15,4 +15,14 @@ function M.add_extension(extension, category)
     defaults.add_extension(extension, category)
 end
 
+function M.add_category(category, direcory)
+    if defaults.contains_category(category) then
+        print("Category with name " .. category .. " already exists")
+        print("-defaults (to get more information)")
+        os.exit()
+    else
+        -- check if directory does not exist in categories
+    end
+end
+
 return M
