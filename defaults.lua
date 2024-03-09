@@ -52,30 +52,24 @@ function M.get_directory(target_cat)
 end
 
 function M.contains_extension(target_ext)
-    local does_contain = false
     for category, extensions in pairs(M.extensions) do
         for _, ext in ipairs(extensions) do
             if ext == target_ext then
-                does_contain = true
-                break
+                return true
             end
         end
-        if does_contain then break end
     end
 
-    return does_contain
+    return false
 end
 
 function M.contains_category(target_cat)
-    local does_contain = false
     for category, extensions in pairs(M.extensions) do
         if target_cat == category then
-            does_contain = true
+            return true
         end
-
-        if does_contain then break end
     end
-    return does_contain
+    return false
 end
 
 function M.contains_directory(target_dir)
@@ -83,12 +77,12 @@ end
 
 function M.add_extension(target_cat, target_ext)
     for category, extensions in pairs(M.extensions) do
+        print(category, " is ", target_cat)
         if target_cat == category then
             table.insert(extensions, target_ext)
             return true
         end
     end
-
     return false
 end
 

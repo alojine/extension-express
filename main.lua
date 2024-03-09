@@ -1,11 +1,10 @@
 local defaults = require("defaults")
-local cleaner = require("cleaner")
 local env_handler = require("env_handler")
 
 local function main()
     if arg[1] == "-clean" then
         -- grab an input dir for cleaner
-        cleaner.clean()
+        env_handler.perform_clean()
     elseif arg[1] == "-defaults" then
         defaults.showcase_defaults()
     elseif arg[1] == "-move" then
@@ -14,7 +13,7 @@ local function main()
         -- create-dir=name
     elseif arg[1] == "-create-ext" then
         -- create extension
-        -- env_handler.add_extension(".txt", "documents")
+        env_handler.add_extension(".txt", "documents")
         defaults.showcase_defaults()
     end
 end
