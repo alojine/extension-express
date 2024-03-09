@@ -8,13 +8,13 @@ local function main()
     elseif arg[1] == "-defaults" then
         defaults.showcase_defaults()
     elseif arg[1] == "-move" then
-        -- move extension
+        -- move extension(.txt) category(documents)
     elseif arg[1] == "-create-cat" then
-        -- create-dir=name
+        -- create-cat category(documents) directory(Documents)
+        env_handler.create_category(arg[2], arg[3])
     elseif arg[1] == "-create-ext" then
-        -- create extension
-        env_handler.add_extension(".txt", "documents")
-        defaults.showcase_defaults()
+        -- create-ext extension(.txt) category(documments)
+        env_handler.create_extension(arg[2], arg[3])
     end
 end
 

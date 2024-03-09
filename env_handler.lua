@@ -24,7 +24,7 @@ function M.perform_clean(dir)
     end
 end
 
-function M.add_extension(extension, category)
+function M.create_extension(extension, category)
     if defaults.contains_extension(extension) then
         print("Extension: " .. extension .. " is already listed in current categories")
         print("-defaults (to get more information)")
@@ -34,18 +34,33 @@ function M.add_extension(extension, category)
         print("-create-cat [category_name] [directory_path] (create a direcory)")
         os.exit()
     end
-    print('Reached reading')
     defaults.add_extension(category, extension)
     defaults.save_defaults()
 end
 
-function M.add_category(category, direcory)
+function M.create_category(category, directory)
     if defaults.contains_category(category) then
         print("Category with name " .. category .. " already exists")
         print("-defaults (to get more information)")
         os.exit()
-    else
-        -- check if directory does not exist in categories
+    elseif defaults.get_directory(directory) then
+        print("Directory " .. directory .. " already exists in current categories")
+        print("-defaults (to get more information)")
+        os.exit()
+    end
+    defaults.add_category(category, directory)
+    defaults.save_defaults()
+end
+
+function M.move(extension, category)
+    if not defaults.contains_category then
+        print("Category with name " .. category .. " does not exists")
+        print("-defaults (to get more information)")
+        os.exit()
+    elseif defaults.contains_extension then
+        print("Extension: " .. extension .. " does not exists")
+        print("-defaults (to get more information)")
+        os.exit()
     end
 end
 
