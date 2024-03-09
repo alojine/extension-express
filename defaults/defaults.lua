@@ -75,6 +75,18 @@ function M.add_extension(target_cat, target_ext)
     return false
 end
 
+function M.delete_extension(target_ext)
+    for category, extensions in pairs(M.extensions) do
+        for i, ext in ipairs(extensions) do
+            if ext == target_ext then
+                table.remove(M.extensions[category], i)
+                return true
+            end
+        end
+    end
+    return false
+end
+
 function M.contains_category(target_cat)
     for category, extensions in pairs(M.extensions) do
         if target_cat == category then
@@ -87,6 +99,16 @@ end
 function M.add_category(target_cat, target_dir)
     M.dirs[target_cat] = target_dir
     M.extensions[target_cat] = {}
+end
+
+function M.delete_category(target_cat)
+    if M.dirs[target_cat] then
+        M.dirs[target_cat] = nil
+        M.extensions[target_cat] = nil
+        return true
+    else
+        return false
+    end
 end
 
 return M

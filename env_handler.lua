@@ -53,15 +53,18 @@ function M.create_category(category, directory)
 end
 
 function M.move(extension, category)
-    if not defaults.contains_category then
+    if not defaults.contains_category(category) then
         print("Category with name " .. category .. " does not exists")
         print("-defaults (to get more information)")
         os.exit()
-    elseif defaults.contains_extension then
+    elseif not defaults.contains_extension(extension) then
         print("Extension: " .. extension .. " does not exists")
         print("-defaults (to get more information)")
         os.exit()
     end
+    defaults.delete_extension(extension)
+    defaults.add_extension(category, extension)
+    defaults.save_defaults()
 end
 
 return M
