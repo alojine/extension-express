@@ -1,4 +1,4 @@
-local defaults = require("defaults")
+local defaults = require("defaults.defaults")
 local env_handler = require("env_handler")
 
 local function main()

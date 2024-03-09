@@ -1,5 +1,5 @@
 local shell_utils = require("shell_utils")
-local defaults = require("defaults")
+local defaults = require("defaults.defaults")
 
 local M = {}
 
@@ -36,6 +36,7 @@ function M.add_extension(extension, category)
     end
     print('Reached reading')
     defaults.add_extension(category, extension)
+    defaults.save_defaults()
 end
 
 function M.add_category(category, direcory)

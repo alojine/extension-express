@@ -1,28 +1,19 @@
-local json = require("cjson")
+local config = require("defaults.config")
 
 local M = {}
 
-M.default_clean_dir = "~/Downloads"
+local environment = config.load_config()
+M.default_clean_dir = environment.default_clean_dir
+M.dirs = environment.dirs
+M.extensions = environment.extensions
 
-M.dirs = {
-    music = "~/Music",
-    documents = "~/Documents",
-    videos = "~/Videos"
-}
-
-M.extensions = {
-    music = { ".mp3", ".wav", ".flac", ".aac", ".ogg", ".m4a", ".wma", ".aiff", ".ape", ".mid" },
-    documents = { ".md", ".tex", ".doc", ".docx", ".odt", ".pages", ".ppt", ".pptx", ".odp", ".key", ".xls", ".xlsx", ".ods", ".numbers", ".pdf", ".html", ".xml" },
-    videos = { ".mpeg", ".mpg", ".mp4", ".mov", ".avi", ".wmv", ".fiv", ".webm", ".ogv", ".mov", ".3gp", ".m4v", ".mkv" }
-}
-
-function M.load_config()
-    local file = io.open("config.json", "r")
-    if file then
-        local content = file:read("*a")
-        file:close()
-        return json.decode(content)
-    end
+function M.save_defaults()
+    local data = {
+        default_clean_dir = M.default_clean_dir,
+        dirs = M.dirs,
+        extensions = M.extensions
+    }
+    config.save_config(data)
 end
 
 function M.showcase_defaults()
