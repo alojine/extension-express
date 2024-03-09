@@ -7,6 +7,22 @@ local M = {}
 local target = "~/Temp"
 local destination = "~/Destination"
 
+local function is_existing_category(category)
+    if not defaults.contains_category(category) then
+        print("Category with name " .. category .. " does not exists")
+        print("-defaults (to get more information)")
+        os.exit()
+    end
+end
+
+local function is_existing_extension(extension)
+    if not defaults.contains_extension(extension) then
+        print("Extension: " .. extension .. " does not exists")
+        print("-defaults (to get more information)")
+        os.exit()
+    end
+end
+
 function M.perform_clean(dir)
     if dir ~= nil then
         -- upgrade directory search
@@ -53,17 +69,23 @@ function M.create_category(category, directory)
 end
 
 function M.move(extension, category)
-    if not defaults.contains_category(category) then
-        print("Category with name " .. category .. " does not exists")
-        print("-defaults (to get more information)")
-        os.exit()
-    elseif not defaults.contains_extension(extension) then
-        print("Extension: " .. extension .. " does not exists")
-        print("-defaults (to get more information)")
-        os.exit()
-    end
+    is_existing_category(category)
+    is_existing_extension(extension)
+
     defaults.delete_extension(extension)
     defaults.add_extension(category, extension)
+    defaults.save_defaults()
+end
+
+function M.remove_category(category)
+    is_existing_category(category)
+    defaults.remove_category(category)
+    defaults.save_defaults()
+end
+
+function M.remove_extension(extension)
+    is_existing_extension(extension)
+    defaults.remove_extension(extension)
     defaults.save_defaults()
 end
 
