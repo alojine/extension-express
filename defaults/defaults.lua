@@ -2,7 +2,7 @@ local config = require("defaults.config")
 
 local M = {}
 
-local environment = config.load_config()
+local environment = config.load()
 M.default_clean_dir = environment.default_clean_dir
 M.dirs = environment.dirs
 M.extensions = environment.extensions
@@ -13,7 +13,7 @@ function M.save_defaults()
         dirs = M.dirs,
         extensions = M.extensions
     }
-    config.save_config(data)
+    config.save(data)
 end
 
 function M.showcase_defaults()

@@ -13,6 +13,7 @@ local function is_existing_category(category)
         print("-defaults (to get more information)")
         os.exit()
     end
+    return true
 end
 
 local function is_existing_extension(extension)
@@ -21,6 +22,7 @@ local function is_existing_extension(extension)
         print("-defaults (to get more information)")
         os.exit()
     end
+    return true
 end
 
 function M.perform_clean(dir)
@@ -45,11 +47,8 @@ function M.create_extension(extension, category)
         print("Extension: " .. extension .. " is already listed in current categories")
         print("-defaults (to get more information)")
         os.exit()
-    elseif not defaults.contains_category(category) then
-        print("Extension: " .. extension .. " cannot be added becouse category: " .. category .. " does not exist")
-        print("-create-cat [category_name] [directory_path] (create a direcory)")
-        os.exit()
     end
+    is_existing_category(category)
     defaults.add_extension(category, extension)
     defaults.save_defaults()
 end
@@ -69,24 +68,25 @@ function M.create_category(category, directory)
 end
 
 function M.move(extension, category)
-    is_existing_category(category)
-    is_existing_extension(extension)
-
-    defaults.delete_extension(extension)
-    defaults.add_extension(category, extension)
-    defaults.save_defaults()
+    if is_existing_category(category) and is_existing_extension(extension) then
+        defaults.delete_extension(extension)
+        defaults.add_extension(category, extension)
+        defaults.save_defaults()
+    end
 end
 
 function M.remove_category(category)
-    is_existing_category(category)
-    defaults.remove_category(category)
-    defaults.save_defaults()
+    if is_existing_category(category) then
+        defaults.delete_category(category)
+        defaults.save_defaults()
+    end
 end
 
 function M.remove_extension(extension)
-    is_existing_extension(extension)
-    defaults.remove_extension(extension)
-    defaults.save_defaults()
+    if is_existing_extension(extension) then
+        defaults.delete_extension(extension)
+        defaults.save_defaults()
+    end
 end
 
 return M

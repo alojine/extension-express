@@ -1,5 +1,6 @@
 local defaults = require("defaults.defaults")
 local env_handler = require("env_handler")
+local config = require("defaults.config")
 
 local function main()
     if arg[1] == "-clean" then
@@ -14,10 +15,11 @@ local function main()
         env_handler.create_extension(arg[2], arg[3])
     elseif arg[1] == "-remove-cat" then
         env_handler.remove_category(arg[2])
-    elseif arg[1] == "remove-ext" then
+    elseif arg[1] == "-remove-ext" then
         env_handler.remove_extension(arg[2])
-    elseif arg[1] == "reset" then
-        -- reset to defaults
+    elseif arg[1] == "-reset" then
+        config.reset()
+    elseif arg[1] == "-help" then
     end
 end
 
