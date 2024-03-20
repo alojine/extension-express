@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 local defaults = require("defaults.defaults")
 local env_handler = require("env_handler")
 local config = require("defaults.config")
