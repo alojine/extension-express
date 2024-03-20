@@ -47,3 +47,7 @@ chmod +x exp.lua
 ## Configuration
 
 You can configure extension-express by editing the configuration files **(defaults.json config.lua)** provided in the repository for personal preferences.
+
+## License
+
+This project is licensed under the [MIT LICENSE](LICENSE).
